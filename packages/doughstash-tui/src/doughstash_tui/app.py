@@ -5,7 +5,7 @@ from textual.widgets import Static
 
 
 class DoughstashApp(App):
-    """Minimal Textual app for doughstash."""
+    """Textual app for doughstash."""
 
     BINDINGS = [("q", "quit", "Quit")]
 
