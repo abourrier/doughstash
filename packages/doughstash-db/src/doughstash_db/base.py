@@ -11,10 +11,6 @@ NAMING_CONVENTION = {
 
 
 class Base(DeclarativeBase):
-    """Declarative base with explicit naming for indices, unique/check/foreign-key/primary-key constraints.
-
-    Predictable names are required for Alembic to generate stable migrations
-    when altering or dropping constraints across dialects.
-    """
+    """Declarative base with explicit naming for indices and constraints."""
 
     metadata = MetaData(naming_convention=NAMING_CONVENTION)
