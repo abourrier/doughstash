@@ -1,0 +1,18 @@
+[project]
+name = "doughstash-cli"
+version = "0.1.0"
+description = "Command-line interface for doughstash."
+requires-python = ">=3.14"
+dependencies = [
+    "typer>=0.12",
+    "doughstash-tui",
+]
+
+[project.scripts]
+doughstash = "doughstash_cli.main:app"
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+doughstash-tui = { workspace = true }
