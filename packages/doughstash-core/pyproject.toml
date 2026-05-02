@@ -1,0 +1,9 @@
+[project]
+name = "doughstash-core"
+version = "0.1.0"
+description = "Domain objects for doughstash."
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+package = true
