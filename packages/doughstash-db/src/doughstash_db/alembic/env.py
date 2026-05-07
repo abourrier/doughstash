@@ -3,6 +3,7 @@ from doughstash_db.base import Base
 from doughstash_db.models import (  # noqa: F401
     account,
     account_type,
+    entry,
     institution,
     instrument,
     instrument_type,

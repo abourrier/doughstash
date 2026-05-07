@@ -74,9 +74,52 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id", name=op.f("pk_instrument")),
         sa.UniqueConstraint("isin", name=op.f("uq_instrument_isin")),
     )
+    op.create_table(
+        "entry",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("account_id", sa.Integer(), nullable=False),
+        sa.Column("kind", sa.String(), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["account_id"],
+            ["account.id"],
+            name=op.f("fk_entry_account_id_account"),
+        ),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_entry")),
+    )
+    op.create_table(
+        "cash_entry",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("amount", sa.Numeric(18, 6), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["id"],
+            ["entry.id"],
+            name=op.f("fk_cash_entry_id_entry"),
+        ),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_cash_entry")),
+    )
+    op.create_table(
+        "position_entry",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("instrument_id", sa.Integer(), nullable=False),
+        sa.Column("quantity", sa.Numeric(18, 6), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["id"],
+            ["entry.id"],
+            name=op.f("fk_position_entry_id_entry"),
+        ),
+        sa.ForeignKeyConstraint(
+            ["instrument_id"],
+            ["instrument.id"],
+            name=op.f("fk_position_entry_instrument_id_instrument"),
+        ),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_position_entry")),
+    )
 
 
 def downgrade() -> None:
+    op.drop_table("position_entry")
+    op.drop_table("cash_entry")
+    op.drop_table("entry")
     op.drop_table("instrument")
     op.drop_table("instrument_type")
     op.drop_table("account")
