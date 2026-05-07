@@ -1,6 +1,5 @@
 from alembic.autogenerate import compare_metadata
 from alembic.migration import MigrationContext
-
 from doughstash_db.base import Base
 from doughstash_db.engine import create_engine
 from doughstash_db.migrations import upgrade
