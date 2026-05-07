@@ -11,3 +11,5 @@ class AccountType(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     code: Mapped[str] = mapped_column(unique=True)
     name: Mapped[str]
+    has_cash_pocket: Mapped[bool]
+    has_securities_pocket: Mapped[bool]

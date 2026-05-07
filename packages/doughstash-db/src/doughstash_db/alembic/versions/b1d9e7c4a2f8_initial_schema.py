@@ -30,6 +30,8 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("code", sa.String(), nullable=False),
         sa.Column("name", sa.String(), nullable=False),
+        sa.Column("has_cash_pocket", sa.Boolean(), nullable=False),
+        sa.Column("has_securities_pocket", sa.Boolean(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_account_type")),
         sa.UniqueConstraint("code", name=op.f("uq_account_type_code")),
     )
@@ -38,7 +40,6 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("institution_id", sa.Integer(), nullable=False),
         sa.Column("account_type_id", sa.Integer(), nullable=False),
-        sa.Column("label", sa.String(), nullable=False),
         sa.ForeignKeyConstraint(
             ["account_type_id"],
             ["account_type.id"],
