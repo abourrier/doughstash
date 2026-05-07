@@ -15,7 +15,7 @@ class Entry(Base):
     account_id: Mapped[int] = mapped_column(ForeignKey("account.id"))
     kind: Mapped[str]
 
-    __mapper_args__ = {"polymorphic_on": "kind"}
+    __mapper_args__ = {"polymorphic_on": "kind"}  # noqa: RUF012
 
 
 class CashEntry(Entry):
@@ -26,7 +26,7 @@ class CashEntry(Entry):
     id: Mapped[int] = mapped_column(ForeignKey("entry.id"), primary_key=True)
     amount: Mapped[Decimal] = mapped_column(Numeric(18, 6))
 
-    __mapper_args__ = {"polymorphic_identity": "cash"}
+    __mapper_args__ = {"polymorphic_identity": "cash"}  # noqa: RUF012
 
 
 class PositionEntry(Entry):
@@ -38,4 +38,4 @@ class PositionEntry(Entry):
     instrument_id: Mapped[int] = mapped_column(ForeignKey("instrument.id"))
     quantity: Mapped[Decimal] = mapped_column(Numeric(18, 6))
 
-    __mapper_args__ = {"polymorphic_identity": "position"}
+    __mapper_args__ = {"polymorphic_identity": "position"}  # noqa: RUF012
