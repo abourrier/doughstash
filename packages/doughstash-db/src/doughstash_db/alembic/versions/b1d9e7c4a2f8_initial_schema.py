@@ -31,7 +31,7 @@ def upgrade() -> None:
         sa.Column("code", sa.String(), nullable=False),
         sa.Column("name", sa.String(), nullable=False),
         sa.Column("has_cash_pocket", sa.Boolean(), nullable=False),
-        sa.Column("has_securities_pocket", sa.Boolean(), nullable=False),
+        sa.Column("has_positions_pocket", sa.Boolean(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_account_type")),
         sa.UniqueConstraint("code", name=op.f("uq_account_type_code")),
     )
@@ -52,9 +52,33 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_account")),
     )
+    op.create_table(
+        "instrument_type",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("code", sa.String(), nullable=False),
+        sa.Column("name", sa.String(), nullable=False),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_instrument_type")),
+        sa.UniqueConstraint("code", name=op.f("uq_instrument_type_code")),
+    )
+    op.create_table(
+        "instrument",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("name", sa.String(), nullable=False),
+        sa.Column("isin", sa.String(), nullable=True),
+        sa.Column("instrument_type_id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["instrument_type_id"],
+            ["instrument_type.id"],
+            name=op.f("fk_instrument_instrument_type_id_instrument_type"),
+        ),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_instrument")),
+        sa.UniqueConstraint("isin", name=op.f("uq_instrument_isin")),
+    )
 
 
 def downgrade() -> None:
+    op.drop_table("instrument")
+    op.drop_table("instrument_type")
     op.drop_table("account")
     op.drop_table("account_type")
     op.drop_table("institution")

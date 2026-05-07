@@ -1,6 +1,12 @@
 from alembic import context
 from doughstash_db.base import Base
-from doughstash_db.models import account, account_type, institution  # noqa: F401
+from doughstash_db.models import (  # noqa: F401
+    account,
+    account_type,
+    institution,
+    instrument,
+    instrument_type,
+)
 
 config = context.config
 connection = config.attributes.get("connection")
