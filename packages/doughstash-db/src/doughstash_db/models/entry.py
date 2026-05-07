@@ -7,7 +7,7 @@ from doughstash_db.base import Base
 
 
 class Entry(Base):
-    """An atomic update to one pocket of one account."""
+    """An atomic update to an account's pocket."""
 
     __tablename__ = "entry"
 
