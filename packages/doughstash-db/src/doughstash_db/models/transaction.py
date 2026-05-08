@@ -24,11 +24,16 @@ class Transfer(Transaction):
 
 
 class Trade(Transaction):
-    """A buy or sell of an instrument within an account."""
+    """A buy or sell of an instrument within an account.
+
+    `direction` is `"buy"` or `"sell"`. A buy has a negative cash entry and a
+    positive position entry; a sell has the opposite.
+    """
 
     __tablename__ = "trade"
 
     id: Mapped[int] = mapped_column(ForeignKey("transaction.id"), primary_key=True)
+    direction: Mapped[str]
     price: Mapped[Decimal] = mapped_column(Numeric(18, 6))
     fees: Mapped[Decimal] = mapped_column(Numeric(18, 6))
 
