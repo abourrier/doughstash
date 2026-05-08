@@ -7,6 +7,7 @@ from doughstash_db.models import (  # noqa: F401
     institution,
     instrument,
     instrument_type,
+    transaction,
 )
 
 config = context.config
