@@ -83,7 +83,7 @@ def upgrade() -> None:
     op.create_table(
         "trade",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("direction", sa.String(), nullable=False),
+        sa.Column("side", sa.String(), nullable=False),
         sa.Column("price", sa.Numeric(18, 6), nullable=False),
         sa.Column("fees", sa.Numeric(18, 6), nullable=False),
         sa.ForeignKeyConstraint(
