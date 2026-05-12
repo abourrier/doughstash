@@ -1,5 +1,4 @@
 import typer
-
 from doughstash_tui.app import run as run_tui
 
 app = typer.Typer()
