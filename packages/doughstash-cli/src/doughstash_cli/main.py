@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+from doughstash_db.engine import create_engine
 from doughstash_tui.app import run as run_tui
 
 from doughstash_cli.config import ENV_DB_PATH, Config
@@ -27,6 +28,11 @@ def main(
 
 
 @app.command()
-def tui() -> None:
+def tui(ctx: typer.Context) -> None:
     """Launch the doughstash TUI."""
-    run_tui()
+    config: Config = ctx.obj
+    engine = create_engine(f"sqlite:///{config.db_path}")
+    try:
+        run_tui(engine)
+    finally:
+        engine.dispose()

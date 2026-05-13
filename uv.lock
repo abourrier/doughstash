@@ -79,12 +79,14 @@ name = "doughstash-cli"
 version = "0.1.0"
 source = { editable = "packages/doughstash-cli" }
 dependencies = [
+    { name = "doughstash-db" },
     { name = "doughstash-tui" },
     { name = "typer" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "doughstash-db", editable = "packages/doughstash-db" },
     { name = "doughstash-tui", editable = "packages/doughstash-tui" },
     { name = "typer", specifier = ">=0.12" },
 ]
@@ -114,11 +116,15 @@ name = "doughstash-tui"
 version = "0.1.0"
 source = { editable = "packages/doughstash-tui" }
 dependencies = [
+    { name = "sqlalchemy" },
     { name = "textual" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "textual", specifier = ">=0.80" }]
+requires-dist = [
+    { name = "sqlalchemy", specifier = ">=2.0" },
+    { name = "textual", specifier = ">=0.80" },
+]
 
 [[package]]
 name = "greenlet"

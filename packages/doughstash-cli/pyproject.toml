@@ -5,6 +5,7 @@ description = "Command-line interface for doughstash."
 requires-python = ">=3.14"
 dependencies = [
     "typer>=0.12",
+    "doughstash-db",
     "doughstash-tui",
 ]
 
@@ -15,4 +16,5 @@ doughstash = "doughstash_cli.main:app"
 package = true
 
 [tool.uv.sources]
+doughstash-db = { workspace = true }
 doughstash-tui = { workspace = true }
