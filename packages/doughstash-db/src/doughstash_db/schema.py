@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from sqlalchemy import MetaData, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -21,7 +23,7 @@ class Person(Base):
 
     __tablename__ = "person"
 
-    NAME_MAX_LENGTH = 64
+    NAME_MAX_LENGTH: ClassVar[int] = 64
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(NAME_MAX_LENGTH))
