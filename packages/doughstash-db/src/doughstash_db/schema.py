@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 NAMING_CONVENTION = {
@@ -21,5 +21,8 @@ class Person(Base):
 
     __tablename__ = "person"
 
+    NAME_MAX_LENGTH = 64
+
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(unique=True)
+    name: Mapped[str] = mapped_column(String(NAME_MAX_LENGTH))
+    name_key: Mapped[bytes] = mapped_column(unique=True)

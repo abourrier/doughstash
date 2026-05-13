@@ -21,9 +21,10 @@ def upgrade() -> None:
     op.create_table(
         "person",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("name", sa.String(), nullable=False),
+        sa.Column("name", sa.String(64), nullable=False),
+        sa.Column("name_key", sa.LargeBinary(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_person")),
-        sa.UniqueConstraint("name", name=op.f("uq_person_name")),
+        sa.UniqueConstraint("name_key", name=op.f("uq_person_name_key")),
     )
 
 
