@@ -1,5 +1,5 @@
 from alembic import context
-from doughstash_db.base import Base
+from doughstash_db.schema import Base
 
 config = context.config
 connection = config.attributes.get("connection")

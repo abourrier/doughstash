@@ -1,5 +1,5 @@
 from sqlalchemy import MetaData
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 NAMING_CONVENTION = {
     "ix": "ix_%(column_0_label)s",
@@ -14,3 +14,12 @@ class Base(DeclarativeBase):
     """Declarative base with explicit naming for indices and constraints."""
 
     metadata = MetaData(naming_convention=NAMING_CONVENTION)
+
+
+class Person(Base):
+    """A person tracked by the app."""
+
+    __tablename__ = "person"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(unique=True)
