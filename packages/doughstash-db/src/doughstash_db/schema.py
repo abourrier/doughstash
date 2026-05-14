@@ -1,5 +1,4 @@
-from typing import ClassVar
-
+from doughstash_core.person import Person as DomainPerson
 from sqlalchemy import MetaData, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
@@ -19,12 +18,10 @@ class Base(DeclarativeBase):
 
 
 class Person(Base):
-    """A person tracked by the app."""
+    """ORM row for `doughstash_core.person.Person`."""
 
     __tablename__ = "person"
 
-    NAME_MAX_LENGTH: ClassVar[int] = 64
-
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(NAME_MAX_LENGTH))
+    name: Mapped[str] = mapped_column(String(DomainPerson.NAME_MAX_LENGTH))
     name_key: Mapped[bytes] = mapped_column(unique=True)

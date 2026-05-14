@@ -3,7 +3,7 @@ name = "doughstash-core"
 version = "0.1.0"
 description = "Domain objects for doughstash."
 requires-python = ">=3.14"
-dependencies = []
+dependencies = ["pyuca>=1.2"]
 
 [tool.uv]
 package = true

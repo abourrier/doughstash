@@ -5,9 +5,12 @@ description = "Database schema for doughstash."
 requires-python = ">=3.14"
 dependencies = [
     "alembic>=1.18",
-    "pyuca>=1.2",
+    "doughstash-core",
     "sqlalchemy>=2.0",
 ]
 
 [tool.uv]
 package = true
+
+[tool.uv.sources]
+doughstash-core = { workspace = true }
